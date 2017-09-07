@@ -4,7 +4,7 @@
 {{ $syntaxoverride := eq (len .Params) 2 }}
 <div class="code-copy" id="{{$file | urlize}}">
 	<div class="code-copy-header"><div class="action-buttons"></div><span title="" class="filename">{{$filepath}}</span><i class="icon-{{$syntax}} input"></i></div>
-	<button class="copy-button" title="Copy to clipboard" data-clipboard-snippet>
+	<button class="copy-button" title="Copy to clipboard".Param.clipboard-snippet>
 			<div class="copy-text"><i class="icon-clipboard"></i> COPY</div>
 	</button>
 	<pre><code class="language-{{if $syntaxoverride}}{{.Get 1}}{{else}}{{$syntax}}{{end}}">{{- readFile $file -}}</code></pre>
