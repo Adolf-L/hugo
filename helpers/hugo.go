@@ -48,7 +48,7 @@ func ParseHugoVersion(s string) (HugoVersion, error) {
 
 	if strings.HasSuffix(s, "-test") {
 		vv.Suffix = "-test"
-		strings.TrimSuffix(s, "-test")
+		s = strings.TrimSuffix(s, "-test")
 	}
 
 	v, p := parseVersion(s)
