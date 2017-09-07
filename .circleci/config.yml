@@ -12,7 +12,7 @@ jobs:
                 git config --global user.name "hugobot"
                 git clone https://github.com/gohugoio/hugoDocs.git
                 make vendor
-                go run -tags release main.go release -r ${CIRCLE_TAG}
+                go run -tags release main.go release -r v0.62
 workflows:
   version: 2
   release:
@@ -20,7 +20,18 @@ workflows:
         - build:
             context: org-global
             filters:
-              tags:
-                only: /v[0-9]+(\.[0-9]+)*(-.*)*-test$/
               branches:
-                ignore: /.*/
+                only: autorelease
+        - approve-release:
+          type: approval
+          requires:
+            - staging-e2e
+          filters:
+            branches:
+              only: autorelease
+        - release:
+          requires:
+            - approve-release
+          filters:
+            branches:
+              only: autorelease
