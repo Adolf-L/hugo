@@ -69,7 +69,7 @@ func (r ReleaseHandler) calculateVersions() (helpers.HugoVersion, helpers.HugoVe
 	finalVersion := newVersion
 	finalVersion.PatchLevel = 0
 
-	if newVersion != "-test" {
+	if newVersion.Suffix != "-test" {
 		newVersion.Suffix = ""
 	}
 
